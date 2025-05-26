@@ -1,0 +1,88 @@
+# Task-1-Scanning-on-Local-Network-
+  Scanning For open ports using Nmap
+     Starting Nmap 7.97 ( https://nmap.org ) at 2025-05-26 14:11 +0530
+        Nmap scan report for 192.168.1.1
+        Host is up (0.0047s latency).
+        Not shown: 995 closed tcp ports (reset)
+        PORT    STATE    SERVICE
+        22/tcp  filtered ssh
+        23/tcp  filtered telnet
+        53/tcp  open     domain
+        80/tcp  open     http
+        443/tcp open     https
+        MAC Address: 64:FB:92:4D:C1:51 (PPC Broadband)
+        
+        Nmap scan report for 192.168.1.70
+        Host is up (0.0012s latency).
+        Not shown: 996 closed tcp ports (reset)
+        PORT     STATE SERVICE
+        135/tcp  open  msrpc
+        139/tcp  open  netbios-ssn
+        445/tcp  open  microsoft-ds
+        5432/tcp open  postgresql
+        
+        Nmap done: 256 IP addresses (2 hosts up) scanned in 34.90 seconds
+
+    Listing Common Ports
+     1) port 53 DNS ( Domain Name System name resolver)
+          Which translates domain names (like google.com) into IP addresses
+          Handling both UDP (fast queries) and TCP (large transfers) requests for domain-to-IP resolution
+     2) port 80  http (Hypper Text Transfer Protocol)
+         Unencrypted HTTP port used for serving web pages
+     3) port 443 https (Hyper Text Transfer Protocol Secure)
+         Port 443 is the standard port for HTTPS encrypted web traffic, ensuring secure communication between browsers and servers.
+     4) port 139 netbios-sn (NetBIOS Session Service)
+         Enabling file and printer sharing in older Windows networks (mainly via SMB over NetBIOS)
+     5) port 5432 portgresql (PostgreSQL database system)
+         Port 5432 is PostgreSQL’s default port for database communications, supporting SQL queries and client-server interactions 
+
+   Listing vulnerablities in Common Ports
+     1) DNS (Domain Name System name resolver)
+         a) DDoS Attacks
+               Attackers can overwhelm DNS servers with large volumes of packets, disrupting service 
+         b) DNS Amplification Attacks
+               Attackers spoof a victim’s IP and send small DNS queries to open resolvers, which respond with much larger replies, overwhelming the target
+         c) DNS Tunneling
+               Attackers encode data (e.g., malware exfiltration) inside DNS queries/responses to bypass firewalls  
+         d) Zone Transfer Attacks
+               Attackers request unauthorized DNS zone transfers (TCP Port 53) to map internal network structures
+
+    2) http (Hyper Text Transfer Protocol)
+         a)  Unencrypted Communication
+               All data is sent in plain text, which makes it easy for attackers to intercept sensitive information like usernames, passwords, or session tokens using packet sniffing
+         b)  Outdated Web Servers     
+               Web servers (like Apache, Nginx, IIS) may have known vulnerabilities if not kept up to date.
+         c)  Misconfigured Web Servers      
+                Directory listing, verbose error messages, or exposed configuration files can leak sensitive information.
+         d) Injection Attacks (SQLi, Command Injection)
+                If the web application accepts user input and does not properly sanitize it, attackers can inject malicious command
+         e) Cross-Site Request Forgery (CSRF)
+                Unauthorized actions can be triggered on behalf of authenticated users.
+         f)  Remote File Inclusion (RFI) and Local File Inclusion (LFI)
+                Vulnerable apps may include arbitrary files from user input.
+         g)  Cross-Site Scripting (XSS)
+                Attackers inject malicious scripts that are executed in the browsers of other users.
+ 
+    3) https (Hyper Text Tranfer Protocol Secure)
+         a) Weak or Outdated SSL/TLS Protocols
+         b) Insecure Cipher Suites
+         c) Improper SSL/TLS Configuration
+         d) Application-Level Vulnerabilities( SQL,CSRF,RFI,LFI etc..)
+         e) TLS Downgrade Attacks ( DROWN, POODLE)
+
+    4) netbios-sn (NetBIOS Session Service)
+         a) SMB Enumeration
+         b) Unauthenticated SMB Sessions
+         c) Remote Code Execution (RCE) Vulnerabilities
+
+    5) portgresql (PostgreSQL database system)
+         a) Unauthenticated Access
+                PostgreSQL may be configured to allow anonymous or weakly authenticated access.
+         b) Weak or Default Credentials
+                 Use of weak passwords or default accounts (like postgres)
+         c) SQL Injection via Web Apps
+                If a web application connected to PostgreSQL is vulnerable to SQL injection, attackers can manipulate database queries
+         d) Remote Code Execution (RCE)
+                Authenticated users with certain roles (e.g., superuser) can execute arbitrary OS commands
+         e) Misconfigured Database Permissions
+                Overly permissive role privileges or public schema access
