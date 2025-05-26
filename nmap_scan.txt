@@ -1,0 +1,22 @@
+
+Nmap scan report for 192.168.1.1
+Host is up (0.0047s latency).
+Not shown: 995 closed tcp ports (reset)
+PORT    STATE    SERVICE
+22/tcp  filtered ssh
+23/tcp  filtered telnet
+53/tcp  open     domain
+80/tcp  open     http
+443/tcp open     https
+MAC Address: 64:FB:92:4D:C1:51 (PPC Broadband)
+
+Nmap scan report for 192.168.1.70
+Host is up (0.0012s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+5432/tcp open  postgresql
+
+Nmap done: 256 IP addresses (2 hosts up) scanned in 34.90 seconds
